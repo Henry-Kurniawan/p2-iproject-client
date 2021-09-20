@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <!-- Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/ea645c2496.js" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <title>Website - Hacklux Watch</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- Headers -->
+    <div id="headers" class="row">
+      <header class="p-2 bg-dark text-white fixed-top" style="height: 90px;">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-lg-start">
+            <div class="col-3">
+
+              <a href="/"
+                class="d-flex justify-content-center align-items-center mb-2 mb-lg-0 text-white text-decoration-none text-end">
+                <img height="70" src="/assets/images/icon_anime.png" alt="" srcset="">
+                <h5 style="font-size: 1.5rem; color: rgb(228, 170, 13);"> Heknime Planets</h5>
+              </a>
+            </div>
+            <div class="col-3">
+              <!-- <form class="col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                          <input class="form-control" type="text" placeholder="Search your favorite anime..." aria-label="Search">
+                    </form> -->
+              <!-- <div class="input-group">
+                <div class="form-outline">
+                  <input type="search" class="form-control" placeholder="Search your favorite anime..." />
+                </div>
+                <button type="button" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div> -->
+            </div>
+
+            <div class="col-1">
+
+            </div>
+
+            <div class="col-2">
+              <button type="button" class="btn btn-labeled btn-warning">
+                <span class="btn-label"><i class="bi bi-star-fill p-1" style="color: orangered;"></i></span>Your
+                Favorites</button>
+            </div>
+
+            <div class="col-3">
+              <div id="not-logged-in" class="text-end">
+                <!-- <button type="button" class="btn btn-outline-light me-2">Login</button>
+                            <button type="button" class="btn btn-warning">Sign-up</button> -->
+
+              </div>
+              <!-- Logged in user -->
+              <div id="logged-in-user" class="d-flex justify-content-end text-end">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="align-items-center">
+                      <img src="https://source.unsplash.com/random/300x200" width="50px" height="50px" alt=""
+                        class="rounded-circle" />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <h6>emaillllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaa</h6>
+                    <button type="button" class="btn btn-primary btn-sm">
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </header>
+    </div>
+    <!--End div Headers-->
+
+    <div id="advanced-search" class="row" style="padding-block-start: 90px;">
+      <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10">
+            <div class="card p-3 py-4">
+              <h5>Find your favorite animes here</h5>
+              <div class="row g-3 mt-2">
+                <!-- <div class="col-md-3">
+                  <div class="dropdown"> <button class="btn btn-secondary dropdown-toggle" type="button"
+                      id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"> Any Status </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="#">Rural</a></li>
+                      <li><a class="dropdown-item" href="#">Urban</a></li>
+                      <li><a class="dropdown-item" href="#">All</a></li>
+                    </ul>
+                  </div>
+                </div> -->
+                <div class="col-md-9"> <input type="text" class="form-control"
+                    placeholder="Enter anime names you want to search"> </div>
+                <div class="col-md-3"> <button class="btn btn-secondary btn-block">Search Results</button> </div>
+              </div>
+              <div class="mt-3"> <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                  aria-controls="collapseExample" class="advanced"> Advance Search With Filters <i
+                    class="fa fa-angle-down"></i> </a>
+                <div class="collapse " id="collapseExample">
+                  <div class="card card-body justify-content-center">
+                    <!-- filter 1 -->
+                    <div class="row mb-2">
+                      <div class="col-md-1"> 
+                        <h5>Genre :</h5>
+                      </div>
+                      <div class="col-md-11">
+                        <div class="row">
+                          <div class="col-sm-2 mb-2">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="col-sm-2 mb-2">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="col-sm-2 mb-2 ">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="col-sm-2 mb-2">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="col-sm-2 mb-2">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="col-sm-2 mb-2 ">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="col-sm-2  mb-2">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Default checkbox
+                            </label>
+                          </div>
+                        </div> 
+                      </div>
+                    </div>
+                    <!-- filter 2 -->
+                    <div class="row mb-2">
+                      <div class="col-md-1"> 
+                        <h5>Status :</h5>
+                      </div>
+                      <div class="col-md-4"> 
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Open this select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                      <div class="col-md-7"> 
+
+                      </div>
+                    </div>
+
+                    <!-- filter 3 -->
+                    <div class="row mb-2">
+                      <div class="col-md-1"> 
+                        <h5>Format : </h5>
+                      </div>
+                      <div class="col-md-4"> 
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Open this select menu</option>
+                          <option value="1">DVD</option>
+                          <option value="2">MOVIE</option>
+                          <option value="3">ONGOING</option>
+                        </select>
+                      </div>
+                      <div class="col-md-7"> 
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div id="body" class="row" style="padding-inline-start: 3rem; padding-inline-end: 2rem;">
+
+
+
+      <!-- main content -->
+      <div id="content" class="container col-12 p-5 row bg-secondary text-white" style="min-height: 100vh;">
+
+        <!-- new login -->
+        <section class="bg-dark">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                  <div class="row g-0">
+                    <div class="col-md-6 col-lg-5 d-none d-md-block">
+                      <img
+                        src="/assets/images/granblue_background1.jpg"
+                        alt="login form"
+                        class="img-fluid" style="border-radius: 1rem 0 0 1rem;"
+                      />
+                    </div>
+                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                      <div class="card-body p-4 p-lg-5 text-black">
+        
+                        <form>
+        
+                          <div class="d-flex align-items-center mb-3 pb-1">
+                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                            <span class="h1 fw-bold mb-0">Login</span>
+                          </div>
+        
+                          <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+        
+                          <div class="form-outline mb-4">
+                            <label class="form-label" for="login-email">Email address</label>
+                            <input type="email" id="login-email" class="form-control form-control-lg" />
+                          </div>
+        
+                          <div class="form-outline mb-4">
+                            <label class="form-label" for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control form-control-lg" />
+                          </div>
+        
+                          <div class="pt-1 mb-4">
+                            <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                          </div>
+        
+                          <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!" style="color: #393f81;">Register here</a></p>
+
+                        </form>
+        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- end div new login -->
+
+        <!-- new register -->
+        <section class="bg-dark">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col">
+                <div class="card card-registration my-4">
+                  <div class="row g-0">
+                    <div class="col-xl-6 d-none d-xl-block">
+                      <img
+                        src="/assets/images/granblue_background3.jpg"
+                        alt="Anime"
+                        class="img-fluid"
+                        style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 100vh;"
+                      />
+                    </div>
+                    <div class="col-xl-6">
+                      <div class="card-body p-md-5 text-black">
+                        <h3 class="mb-5 text-uppercase">Registration form</h3>
+
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="register-email">Email (username)</label>
+                          <input type="email" id="register-email" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="register-password">Password</label>
+                          <input type="password" id="register-password" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                              <label class="form-label" for="register-fistname">First name</label>
+                              <input type="text" id="register-fistname" class="form-control form-control-lg" />
+                            </div>
+                          </div>
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                              <label class="form-label" for="register-lastname">Last name</label>
+                              <input type="text" id="register-lastname" class="form-control form-control-lg" />
+                            </div>
+                          </div>
+                        </div>
+
+        
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="register-address">Address</label>
+                          <input type="text" id="register-address" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="register-phone">Phone Number</label>
+                          <input type="text" id="register-phone" class="form-control form-control-lg" />
+                        </div>    
+        
+                        <div class="d-flex justify-content-end pt-3">
+                          <button type="button" class="btn btn-light btn-lg">Reset all</button>
+                          <button type="button" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                        </div>
+        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+         <!-- end new register -->
+
+      
+        <!-- Product list -->
+        <div id="product-list" class="container">
+          <div class="jumbotron">
+            <div class="container">
+              <h1 class="display-3">Our anime list</h1>
+              <p>please check our products here</p>
+            </div>
+          </div>
+
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+
+
+            <div class="col-4 pt-5 text-black">
+              <div class="card h-100 w-75">
+          
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+              
+                <div class="card-body">
+                  <h5 class="card-title fst-italic">
+                    {{ anime.name }}
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    {{ anime.description }}
+                  </p>
+                </div>
+                <div class="card-body text-center">
+                  <button type="button" class="btn btn-info btn-sm mr-1 mb-2"><i class="fas fa-info-circle pr-2"></i>Details</button>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip"
+                    data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4 pt-5 text-black">
+              <div class="card h-100 w-75">
+          
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+              
+                <div class="card-body">
+                  <h5 class="card-title fst-italic">
+                    {{ anime.name }}
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    {{ anime.description }}
+                  </p>
+                </div>
+                <div class="card-body text-center">
+                  <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i class="fas fa-info-circle pr-2"></i>Details</button>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip"
+                    data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4 pt-5 text-black">
+              <div class="card h-100 w-75">
+          
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+              
+                <div class="card-body">
+                  <h5 class="card-title fst-italic">
+                    {{ anime.name }}
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    {{ anime.description }}
+                  </p>
+                </div>
+                <div class="card-body text-center">
+                  <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i class="fas fa-info-circle pr-2"></i>Details</button>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip"
+                    data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4 pt-5 text-black">
+              <div class="card h-100 w-75">
+          
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+              
+                <div class="card-body">
+                  <h5 class="card-title fst-italic">
+                    {{ anime.name }}
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    {{ anime.description }}
+                  </p>
+                </div>
+                <div class="card-body text-center">
+                  <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i class="fas fa-info-circle pr-2"></i>Details</button>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip"
+                    data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4 pt-5 text-black">
+              <div class="card h-100 w-75">
+          
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+              
+                <div class="card-body">
+                  <h5 class="card-title fst-italic">
+                    {{ anime.name }}
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    {{ anime.description }}
+                  </p>
+                </div>
+                <div class="card-body text-center">
+                  <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i class="fas fa-info-circle pr-2"></i>Details</button>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip"
+                    data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div> <!-- end div product list -->
+
+
+        <!-- new ANime detail -->
+
+        <section class="">
+          <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+
+              <div class=" mb-3 mb-md-0">
+                <a href="#!">
+                  <div class="mask">
+                    <img class="img-fluid w-100"
+                      src="https://picsum.photos/200">
+                    <div class="mask rgba-black-slight"></div>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+              <div class="row">
+                <div class="col-lg-7 col-xl-7">
+
+                  <h5>Title</h5>
+                  <p class="mb-2 text-uppercase small">Genres</p>
+                  <ul class="rating text-decoration-none">
+                    <li>
+                      <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-primary"></i>
+                    </li>
+                  </ul>
+                  <hr>
+                  <p class="mb-lg-0"> DESCRIPTION Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
+                    sapiente illo. Sit error voluptas repellat rerum quidem, soluta enim perferendis
+                    voluptates laboriosam. Distinctio, officia quis dolore quos sapiente tempore alias.</p>
+
+                </div>
+                <div class="col-lg-5 col-xl-5">
+
+                  <h6 class="mb-3"><span>MORE INFO</span></h6>
+                  <div class="my-4">
+                    <h5>QR CODE</h5>
+                  </div>
+                  <div class="my-4">
+                    <h5>SEQUEL PREQUEL</h5>
+                  </div>
+                  <button type="button" class="btn btn-danger btn-md px-3 mb-lg-2 material-tooltip-main"
+                    data-toggle="tooltip" data-placement="top" title="Add to wishlist"><i
+                      class="far fa-heart"></i></button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <!-- end new ANime detail -->
+
+        <!-- Bookmark -->
+        <div id="bookmark-list" class="container text-white">
+          <div class="jumbotron">
+            <div class="container">
+              <h1 class="display-3">Your Bookmarked Products</h1>
+              <p>please check our products here</p>
+            </div>
+          </div>
+
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+
+
+            <div class="col">
+              <div class="card h-100 w-75">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+                <div class="card-body">
+                  <button type="button" class="btn btn-labeled btn-warning">
+                    <span class="btn-label"><i class="bi bi-bookmarks"></i></span>Bookmark</button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 w-75">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+                <div class="card-body">
+                  <button type="button" class="btn btn-labeled btn-warning">
+                    <span class="btn-label"><i class="bi bi-bookmarks"></i></span>Bookmark</button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 w-75">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+                <div class="card-body">
+                  <button type="button" class="btn btn-labeled btn-warning">
+                    <span class="btn-label"><i class="bi bi-bookmarks"></i></span>Bookmark</button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This card has even longer content than the first to show that equal height
+                    action.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 w-75">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+                <div class="card-body">
+                  <button type="button" class="btn btn-labeled btn-warning">
+                    <span class="btn-label"><i class="bi bi-bookmarks"></i></span>Bookmark</button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This card has even longer content than the first to show that equal height
+                    action.</p>
+                </div>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 w-75">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="https://picsum.photos/200">
+                <div class="card-body">
+                  <button type="button" class="btn btn-labeled btn-warning">
+                    <span class="btn-label"><i class="bi bi-bookmarks"></i></span>Bookmark</button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This card has even longer content than the first to show that equal height
+                    action.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end div Bookmark -->
+
+        <!-- Product detail -->
+        <div id="product-detail" class="container">
+          <div class="py-5 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="gold" class="bi bi-watch"
+              viewBox="0 0 16 16">
+              <path d="M8.5 5a.5.5 0 0 0-1 0v2.5H6a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5V5z" />
+              <path
+                d="M5.667 16C4.747 16 4 15.254 4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86a5.99 5.99 0 0 1 1.918 3.48.502.502 0 0 1 .582.493v1a.5.5 0 0 1-.582.493A5.99 5.99 0 0 1 12 12.473v1.86c0 .92-.746 1.667-1.667 1.667H5.667zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z" />
+            </svg>
+            <h2>Product name</h2>
+            <p class="lead"></p>
+          </div>
+          <div class="justify-content-center d-flex mx-auto">
+            <div class="card" style="width: 60%;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+                <p class="card-text">Description</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Price </li>
+                <li class="list-group-item">Category</li>
+                <li class="list-group-item">More</li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link">Back to bookmark list</a>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- End product detail-->
+
+      </div> <!-- end div main content -->
+
+      <!-- footer -->
+      <div id="footer" class="row">
+        <footer class="mastfoot mt-auto bg-dark text-white text-center container" style="height: 100px;">
+          <div class="inner">
+            <p>Contact us at <a href="https://github.com/Henry-Kurniawan">Github</a>.</p>
+          </div>
+        </footer>
+      </div>
+      <!--end div footer-->
+
+    </div> <!-- end div body -->
+
+
+  </div>
+  <!--End div app-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
