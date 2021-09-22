@@ -115,11 +115,13 @@ export default new Vuex.Store({
       .then(({data}) => {
         context.commit("SET_ANIMES", data)
         context.commit("SET_PREV_FILTER", params)
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: `${data.data.count} anime found! total page: ${data.data.last_page}`,
-        });
+        if(payload) {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: `${data.data.count} anime found! total page: ${data.data.last_page}`,
+          });
+        }
       })
       .catch((err) => {
         Swal.fire({
