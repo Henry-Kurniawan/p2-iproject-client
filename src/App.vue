@@ -21,6 +21,11 @@ export default {
     AdvancedSearch,
     Header,
     Footer
+  },
+  created() {
+    if(localStorage.access_token) {
+      this.$store.commit("SET_ALREADY_LOGIN")
+    }
   }
 }
 </script>
