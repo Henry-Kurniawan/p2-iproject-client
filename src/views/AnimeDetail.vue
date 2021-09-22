@@ -1,43 +1,101 @@
 <template>
-   <!-- anime detail -->
-    <div id="anime-detail" class="container">
-        <div class="py-5 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="gold" class="bi bi-watch" viewBox="0 0 16 16">
-                <path d="M8.5 5a.5.5 0 0 0-1 0v2.5H6a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5V5z"/>
-                <path d="M5.667 16C4.747 16 4 15.254 4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86a5.99 5.99 0 0 1 1.918 3.48.502.502 0 0 1 .582.493v1a.5.5 0 0 1-.582.493A5.99 5.99 0 0 1 12 12.473v1.86c0 .92-.746 1.667-1.667 1.667H5.667zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z"/>
-            </svg>
-            <h2>Anime Name</h2>
-            <p class="lead"></p>
-        </div>
-        <div class="justify-content-center d-flex mx-auto">
-            <div class="card" style="width: 60%;">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="...">
-                <div class="card-body text-black">
-                    <h5 class="card-title fst-italic">title</h5>
-                    <p class="card-text">detail</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">============== </li>
-                    <li class="list-group-item">=================</li>
-                    <li class="list-group-item">
-                        <!-- <img :src="QRCode" alt="qrcode"> -->
-                    </li>
-                </ul>
-                <div class="card-body">
-                   <button @click.prevent="backToPreviousPage" type="button" class="btn btn-secondary btn-rounded">Back</button>
-                </div>
-            </div>
-        </div>
+  <section class="h-100 mt-5">
+    <div class="row mb-4">
+      <div class="col-md-5 col-lg-4 col-xl-4">
+        <div class="mb-3 mb-md-0">
+          <div class="card">
+            <img class="img w-100 h-100" :src="animeDetail.data.cover_image" />
+            <div class="card rgba-black-slight"></div>
 
-    </div> <!-- End anime detail-->
+            <div class="card-body">
+                <button @click.prevent="backToPreviousPage" type="button" class="btn btn-secondary btn-rounded">Back</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-8 col-xl-8">
+        <div class="row">
+          <div class="col-lg-7 col-xl-7">
+            <h3>{{ animeDetail.data.titles.en }}</h3>
+            <hr />
+            <h4>TAGS</h4>
+            <p class="mb-2 text-uppercase small">{{ animeGenre }}</p>
+
+            <hr />
+            <h4>DESCRIPTION</h4>
+            <p v-if="animeDetail.data.descriptions.en" class="mb-lg-0">
+              {{ animeDetail.data.descriptions.en }}
+            </p>
+            <p v-else class="mb-lg-0">{{ animeDetail.data.descriptions.it }}</p>
+          </div>
+          <div class="col-lg-5 col-xl-5">
+            <h6 class="mb-3"><span>MORE INFO</span></h6>
+            <div class="my-4">
+              <h5><img :src="QRCode" alt="qrcode" /></h5>
+            </div>
+            <div v-if="animeDetail.data.sequel" class="my-4">
+              <h5>Status: {{ animeStatus }}</h5>
+            </div>
+
+            <div v-if="animeDetail.data.prequel" class="my-4">
+              <h5>Format: {{ animeFormat }}</h5>
+            </div>
+            <div class="my-4">
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                  class="embed-responsive-item"
+                  :src="animeDetail.data.trailer_url"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 export default {
-    name: "AnimeDetail"
-}
+  name: "AnimeDetail",
+  methods: {
+    backToPreviousPage() {
+      this.$router.go(-1);
+    },
+  },
+  computed: {
+    animeDetail() {
+      return this.$store.state.animeDetail;
+    },
+
+    animeGenre() {
+      return this.$store.getters.formatGenre;
+    },
+
+    animeStatus() {
+      return this.$store.getters.detailStatus;
+    },
+
+    animeFormat() {
+      return this.$store.getters.detailFormat;
+    },
+
+    QRCode() {
+      return this.$store.state.QRCode;
+    },
+  },
+  created() {
+    const payload = this.$route.params;
+    const payloadQR = {
+      path: this.$route.path,
+    };
+    this.$store.dispatch("actionFetchQRCode", payloadQR);
+    this.$store.dispatch("fetchAnimeDetail", payload);
+  },
+};
 </script>
 
 <style>
-
 </style>
