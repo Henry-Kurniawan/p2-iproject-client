@@ -20,13 +20,13 @@
             <h5 class="card-title">{{ bookmark.name }}</h5>
           </div>
 
-          <div v-if="!bookmark.dueComplete" class="card-body">
+          <div @click="editBookmarkStatus(bookmark.id, true)" v-if="!bookmark.dueComplete" class="card-body">
             <button type="button" class="btn btn-secondary btn-sm mr-1 mb-2">
               <i class="fas fa-book pr-2"></i>Unread
             </button>
           </div>
 
-          <div v-if="bookmark.dueComplete" class="card-body">
+          <div @click="editBookmarkStatus(bookmark.id, false)" v-if="bookmark.dueComplete" class="card-body">
             <button type="button" class="btn btn-success btn-sm mr-1 mb-2">
               <i class="far fa-check-circle pr-2"></i>Done
             </button>
@@ -71,6 +71,34 @@ export default {
             icon: 'info',
             title: 'Success',
             text: data.message
+          })
+
+          this.$store.dispatch("fetchBookmark");
+
+          this.$router.push({
+            name: "MyBookmark"
+          })
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message 
+          })
+        })
+    },
+
+    editBookmarkStatus(bookmarkId, status) {
+      const payload = {
+        id: bookmarkId,
+        status
+      }
+      this.$store.dispatch("editBookmarkStatus", payload)
+      .then( ({data}) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'OK',
+            text: `Bookmark ${data.name} status changed!`
           })
 
           this.$store.dispatch("fetchBookmark");

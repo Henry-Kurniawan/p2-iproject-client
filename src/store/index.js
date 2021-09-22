@@ -197,8 +197,21 @@ export default new Vuex.Store({
           access_token: localStorage.access_token,
           Accept: "application/json"
         }
-      })
-        
+      })   
+    },
+
+    editBookmarkStatus(context, payload) {
+      return axios({
+        url: `${this.state.baseURL}/users/bookmarks/${payload.id}`,
+        method: "put",
+        headers: {
+          access_token: localStorage.access_token,
+          Accept: "application/json"
+        },
+        params: {
+          status: payload.status
+        }
+      })   
     },
 
     actionFetchQRCode(context, payload) {
