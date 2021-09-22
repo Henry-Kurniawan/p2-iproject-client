@@ -2,8 +2,15 @@
   <div id="app">
     <Header></Header>
     <AdvancedSearch></AdvancedSearch>
-      <div id="body" class="row" style="padding-inline-start: 3rem; padding-inline-end: 2rem;">
-        <router-view />
+      <div id="body" class="row" style="padding-inline-start: 3rem; padding-inline-end: 2rem; min-height: 100vh">
+        <!-- loading -->
+        <div v-if="isLoading" class="d-flex justify-content-center align-item-center">
+          <div class="spinner-border text-black" style="width: 10rem; height: 10rem;" role="status">
+            <span class="visually-hidden">Loading..</span>
+          </div>
+        </div>
+        <!-- content -->
+        <router-view v-if="!isLoading"></router-view>
       </div>
     <HFooter></HFooter>
   </div>
@@ -20,6 +27,11 @@ export default {
     AdvancedSearch,
     Header,
     HFooter
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
   created() {
     if(localStorage.access_token) {

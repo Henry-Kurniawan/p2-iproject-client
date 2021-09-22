@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isLoggedIn: false,
     baseURL: 'http://localhost:4002',
     logged_email: "",
+    isLoading: false,
 
     prev_filter_name: "",
     prev_filter_genres: [],
@@ -44,6 +45,10 @@ export default new Vuex.Store({
 
     SET_ANIMES(state, payload) {
       state.animes = payload
+    },
+
+    SET_LOADING(state, payload) {
+      state.isLoading = payload.status
     },
 
     SET_PREV_FILTER(state, payload) {
@@ -112,6 +117,8 @@ export default new Vuex.Store({
         }
       }
 
+      context.commit("SET_LOADING", {status: true})
+
       axios({
         url: `${this.state.baseURL}/animes`,
         method: "get",
@@ -127,6 +134,9 @@ export default new Vuex.Store({
             text: `${data.data.count} anime found! total page: ${data.data.last_page}`,
           });
         }
+
+        context.commit("SET_LOADING", {status: false})
+
       })
       .catch((err) => {
         Swal.fire({
@@ -138,12 +148,14 @@ export default new Vuex.Store({
     },
 
     fetchAnimeDetail(context, payload) {
+
       axios({
         url: `${this.state.baseURL}/animes/${payload.id}`,
         method:"get",
       })
         .then( ({data} ) => {
           context.commit("SET_ANIME_DETAIL", data)
+
         })
         .catch((err) => {
           Swal.fire({
