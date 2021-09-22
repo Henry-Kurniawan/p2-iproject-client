@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     isLoggedIn: false,
     baseURL: 'http://localhost:4002',
-    logged_email: ""
+    logged_email: "",
+    animes:[],
   },
   mutations: {
     SET_LOGIN(state, data) {
@@ -29,6 +30,10 @@ export default new Vuex.Store({
       localStorage.clear()
       state.isLoggedIn = false
     },
+
+    SET_ANIMES(state, payload) {
+      state.animes = payload
+    }
   },
   actions: {
     actionLoginHandler(context, payload) {
@@ -59,11 +64,34 @@ export default new Vuex.Store({
         data: register_payload
       })
     },
+
+    fetchAnime(context) {
+      axios({
+        url: `${this.state.baseURL}/animes`,
+        method: "get",
+      })
+      .then(({data}) => {
+        context.commit("SET_ANIMES", data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+    }
   },
   getters: {
     formatEmailName(state) {
       let result = state.logged_email.split("@")
       return result[0]
+    },
+
+    shortenedDesciption(state) {
+      if(state.animes) {
+        state.anime.data.documents.forEach(el => {
+          el.desciptions.en = el.desciptions.en.substring(0,50) + "..."
+          el.desciptions.it = el.desciptions.it.substring(0,50) + "..."
+        });
+      }
+      return state.animes
     }
   },
   modules: {},

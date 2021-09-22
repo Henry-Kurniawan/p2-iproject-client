@@ -8,25 +8,15 @@
       </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col-4 pt-5 text-black">
-        <div class="card h-100 w-75">
+    <div class="row g-4">
+      <div v-for="anime in animes.data.documents" :key="anime.id" class="col-3 pt-5 text-black">
+        <div class="card h-50 w-100">
           <img
-            src="https://picsum.photos/200"
+            :src="anime.cover_image"
             class="card-img-top"
             alt="https://picsum.photos/200"
           />
 
-          <div class="card-body">
-            <h5 class="card-title fst-italic">
-               name 
-            </h5>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-               description 
-            </p>
-          </div>
           <div class="card-body text-center">
             <button type="button" class="btn btn-info btn-sm mr-1 mb-2">
               <i class="fas fa-info-circle pr-2"></i>Details
@@ -41,6 +31,22 @@
               <i class="far fa-heart"></i>
             </button>
           </div>
+
+          <div class="card-body">
+            <h5 class="card-title fst-italic">
+               {{anime.titles.en}} 
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <p v-if="anime.descriptions.en" class="card-text">
+               {{anime.descriptions.en}} 
+            </p>
+            <p v-else class="card-text">
+               {{anime.descriptions.it}} 
+            </p>
+          </div>
+        
         </div>
       </div>
 
@@ -52,6 +58,14 @@
 <script>
 export default {
   name: "AnimeList",
+  computed: {
+    animes() {
+      return this.$store.state.animes
+    },
+  },
+  created() {
+    this.$store.dispatch("fetchAnime")
+  }
 };
 </script>
 
