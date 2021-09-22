@@ -12,11 +12,13 @@
 
               <div class="col-md-2">
                 <input
+                  @change="filterAnimes"
                   v-model="filter_page"
                   id="page-input"
                   type="number"
                   class="form-control"
                   min="1"
+                  :max="animes.data.last_page"
                 />
               </div>
 
@@ -184,6 +186,10 @@ export default {
     genres() {
       return this.$store.state.animeGenres;
     },
+
+    animes() {
+      return this.$store.state.animes;
+    }
   },
   created() {
     this.$store.dispatch("fetchGenres");

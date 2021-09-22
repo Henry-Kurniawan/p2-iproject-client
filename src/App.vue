@@ -2,25 +2,36 @@
   <div id="app">
     <Header></Header>
     <AdvancedSearch></AdvancedSearch>
-      <div id="body" class="row" style="padding-inline-start: 3rem; padding-inline-end: 2rem;">
-        <router-view />
+      <div id="body" class="row" style="padding-inline-start: 3rem; padding-inline-end: 2rem; min-height: 100vh">
+        <!-- loading -->
+        <div v-if="isLoading" class="d-flex justify-content-center align-item-center">
+          <div class="spinner-border text-black" style="width: 10rem; height: 10rem;" role="status">
+            <span class="visually-hidden">Loading..</span>
+          </div>
+        </div>
+        <!-- content -->
+        <router-view v-if="!isLoading"></router-view>
       </div>
-    <Footer></Footer>
-    
+    <HFooter></HFooter>
   </div>
 </template>
 
 <script>
 import AdvancedSearch from './components/AdvancedSearch.vue'
 import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
+import HFooter from 'vue-hacktiv8-footer'
 
 export default {
   name: "App",
   components: {
     AdvancedSearch,
     Header,
-    Footer
+    HFooter
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
   created() {
     if(localStorage.access_token) {

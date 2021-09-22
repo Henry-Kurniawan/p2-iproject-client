@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isLoggedIn: false,
     baseURL: 'http://localhost:4002',
     logged_email: "",
+    isLoading: false,
 
     prev_filter_name: "",
     prev_filter_genres: [],
@@ -18,6 +19,7 @@ export default new Vuex.Store({
 
     animes:[],
     animeGenres: [],
+    bookmarks: [],
     animeDetail: "",
     QRCode: "",
   },
@@ -45,6 +47,10 @@ export default new Vuex.Store({
       state.animes = payload
     },
 
+    SET_LOADING(state, payload) {
+      state.isLoading = payload.status
+    },
+
     SET_PREV_FILTER(state, payload) {
       state.prev_filter_name= payload.name
       state.prev_filter_min_price= payload.min_price
@@ -58,6 +64,10 @@ export default new Vuex.Store({
 
     SET_ANIME_GENRES(state, payload) {
       state.animeGenres = payload
+    },
+
+    SET_USER_BOOKMARKS(state, payload) {
+      state.bookmarks = payload
     },
 
     SET_QR_CODE(state, payload) {
@@ -94,6 +104,16 @@ export default new Vuex.Store({
       })
     },
 
+    fetchAnimeByName(context, payload) {
+      return axios({
+        url: `${this.state.baseURL}/animes`,
+        method: "get",
+        params: {
+          title:payload.title
+        }
+      })
+    },
+
     fetchAnimes(context, payload) {
       let params = {}
       if(payload) {
@@ -106,6 +126,8 @@ export default new Vuex.Store({
           title: payload.title
         }
       }
+
+      context.commit("SET_LOADING", {status: true})
 
       axios({
         url: `${this.state.baseURL}/animes`,
@@ -122,6 +144,9 @@ export default new Vuex.Store({
             text: `${data.data.count} anime found! total page: ${data.data.last_page}`,
           });
         }
+
+        context.commit("SET_LOADING", {status: false})
+
       })
       .catch((err) => {
         Swal.fire({
@@ -133,12 +158,14 @@ export default new Vuex.Store({
     },
 
     fetchAnimeDetail(context, payload) {
+
       axios({
         url: `${this.state.baseURL}/animes/${payload.id}`,
         method:"get",
       })
         .then( ({data} ) => {
           context.commit("SET_ANIME_DETAIL", data)
+
         })
         .catch((err) => {
           Swal.fire({
@@ -166,6 +193,64 @@ export default new Vuex.Store({
         })
     },
 
+    fetchBookmark(context) {
+      axios({
+        url: `${this.state.baseURL}/users/bookmarks`,
+        method: "get",
+        headers: {access_token: localStorage.access_token}
+      })
+        .then( ({data} ) => {
+          context.commit("SET_USER_BOOKMARKS", data)
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message 
+          })
+        })
+    },
+
+    deleteBookmark(context, payload) {
+      return axios({
+        url: `${this.state.baseURL}/users/bookmarks/${payload.id}`,
+        method: "delete",
+        headers: {
+          access_token: localStorage.access_token,
+          Accept: "application/json"
+        }
+      })   
+    },
+
+    editBookmarkStatus(context, payload) {
+      return axios({
+        url: `${this.state.baseURL}/users/bookmarks/${payload.id}`,
+        method: "put",
+        headers: {
+          access_token: localStorage.access_token,
+          Accept: "application/json"
+        },
+        params: {
+          status: payload.status
+        }
+      })   
+    },
+
+    actionAddBookmark(context, payload) {
+
+      return axios({
+        url: `${this.state.baseURL}/users/bookmarks`,
+        method:"post",
+        params: {
+          title: payload.animeTitle
+        },
+        headers: {
+          access_token: localStorage.access_token,
+          Accept: "application/json"
+        },
+      })
+    },
+
     actionFetchQRCode(context, payload) {
       const url = `${this.baseURL}${payload.path}`
       const params = {
@@ -191,7 +276,6 @@ export default new Vuex.Store({
           text: err.response.data.message 
         })
       })
-
     }
   },
 
