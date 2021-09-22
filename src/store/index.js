@@ -18,6 +18,7 @@ export default new Vuex.Store({
 
     animes:[],
     animeGenres: [],
+    bookmarks: [],
     animeDetail: "",
     QRCode: "",
   },
@@ -58,6 +59,10 @@ export default new Vuex.Store({
 
     SET_ANIME_GENRES(state, payload) {
       state.animeGenres = payload
+    },
+
+    SET_USER_BOOKMARKS(state, payload) {
+      state.bookmarks = payload
     },
 
     SET_QR_CODE(state, payload) {
@@ -166,6 +171,36 @@ export default new Vuex.Store({
         })
     },
 
+    fetchBookmark(context) {
+      axios({
+        url: `${this.state.baseURL}/users/bookmarks`,
+        method: "get",
+        headers: {access_token: localStorage.access_token}
+      })
+        .then( ({data} ) => {
+          context.commit("SET_USER_BOOKMARKS", data)
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message 
+          })
+        })
+    },
+
+    deleteBookmark(context, payload) {
+      return axios({
+        url: `${this.state.baseURL}/users/bookmarks/${payload.id}`,
+        method: "delete",
+        headers: {
+          access_token: localStorage.access_token,
+          Accept: "application/json"
+        }
+      })
+        
+    },
+
     actionFetchQRCode(context, payload) {
       const url = `${this.baseURL}${payload.path}`
       const params = {
@@ -191,7 +226,6 @@ export default new Vuex.Store({
           text: err.response.data.message 
         })
       })
-
     }
   },
 

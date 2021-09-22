@@ -5,22 +5,21 @@
       <div id="body" class="row" style="padding-inline-start: 3rem; padding-inline-end: 2rem;">
         <router-view />
       </div>
-    <Footer></Footer>
-    
+    <HFooter></HFooter>
   </div>
 </template>
 
 <script>
 import AdvancedSearch from './components/AdvancedSearch.vue'
 import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
+import HFooter from 'vue-hacktiv8-footer'
 
 export default {
   name: "App",
   components: {
     AdvancedSearch,
     Header,
-    Footer
+    HFooter
   },
   created() {
     if(localStorage.access_token) {

@@ -44,7 +44,7 @@
               class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main"
               data-toggle="tooltip"
               data-placement="top"
-              title="Add to wishlist"
+              title="Add to bookmark"
             >
               <i class="far fa-heart"></i>
             </button>
