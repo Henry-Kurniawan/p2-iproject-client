@@ -10,23 +10,33 @@
     <div class="row">
       <div v-for="bookmark in bookmarks" :key="bookmark.id" class="col-2">
         <div class="card h-25 w-100 border-dark mb-3">
+          
+
           <div class="card-body">
-            <button type="button" class="btn btn-labeled btn-info">
+            <button @click.prevent="findAnimeByName( bookmark.name )" type="button" class="btn btn-labeled btn-info">
               <span class="btn-label"><i class="bi bi-book"></i></span>Info
             </button>
           </div>
-          
+
           <div class="card-body">
-            <h5 class="card-title">{{ bookmark.name }}</h5>
+            <h6 class="card-title">{{ bookmark.name }}</h6>
           </div>
 
-          <div @click="editBookmarkStatus(bookmark.id, true)" v-if="!bookmark.dueComplete" class="card-body">
+          <div
+            @click="editBookmarkStatus(bookmark.id, true)"
+            v-if="!bookmark.dueComplete"
+            class="card-body"
+          >
             <button type="button" class="btn btn-secondary btn-sm mr-1 mb-2">
               <i class="fas fa-book pr-2"></i>Unread
             </button>
           </div>
 
-          <div @click="editBookmarkStatus(bookmark.id, false)" v-if="bookmark.dueComplete" class="card-body">
+          <div
+            @click="editBookmarkStatus(bookmark.id, false)"
+            v-if="bookmark.dueComplete"
+            class="card-body"
+          >
             <button type="button" class="btn btn-success btn-sm mr-1 mb-2">
               <i class="far fa-check-circle pr-2"></i>Done
             </button>
@@ -52,7 +62,7 @@
 </template>
 
 <script>
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 export default {
   name: "MyBookmark",
   computed: {
@@ -61,60 +71,86 @@ export default {
     },
   },
   methods: {
+    findAnimeByName(title) {
+      const payload = {
+        title,
+      };
+      this.$store
+        .dispatch("fetchAnimeByName", payload)
+        .then(({ data }) => {
+          let animeId = data.data.documents[0].id;
+          this.$router.push({
+            name: "AnimeDetail",
+            params: {
+              id: animeId,
+            },
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
+        });
+    },
+
     deleteBookmarkHandler(bookmarkId) {
       const payload = {
-        id: bookmarkId
-      }
-      this.$store.dispatch("deleteBookmark", payload)
-      .then( ({data}) => {
+        id: bookmarkId,
+      };
+      this.$store
+        .dispatch("deleteBookmark", payload)
+        .then(({ data }) => {
           Swal.fire({
-            icon: 'info',
-            title: 'Success',
-            text: data.message
-          })
+            icon: "info",
+            title: "Success",
+            text: data.message,
+          });
 
           this.$store.dispatch("fetchBookmark");
 
           this.$router.push({
-            name: "MyBookmark"
-          })
+            name: "MyBookmark",
+          });
         })
         .catch((err) => {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: err.response.data.message 
-          })
-        })
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
+        });
     },
 
     editBookmarkStatus(bookmarkId, status) {
       const payload = {
         id: bookmarkId,
-        status
-      }
-      this.$store.dispatch("editBookmarkStatus", payload)
-      .then( ({data}) => {
+        status,
+      };
+      this.$store
+        .dispatch("editBookmarkStatus", payload)
+        .then(({ data }) => {
           Swal.fire({
-            icon: 'success',
-            title: 'OK',
-            text: `Bookmark ${data.name} status changed!`
-          })
+            icon: "success",
+            title: "OK",
+            text: `Bookmark ${data.name} status changed!`,
+          });
 
           this.$store.dispatch("fetchBookmark");
 
           this.$router.push({
-            name: "MyBookmark"
-          })
+            name: "MyBookmark",
+          });
         })
         .catch((err) => {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: err.response.data.message 
-          })
-        })
-    }
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
+        });
+    },
   },
   created() {
     this.$store.dispatch("fetchBookmark");

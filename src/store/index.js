@@ -104,6 +104,16 @@ export default new Vuex.Store({
       })
     },
 
+    fetchAnimeByName(context, payload) {
+      return axios({
+        url: `${this.state.baseURL}/animes`,
+        method: "get",
+        params: {
+          title:payload.title
+        }
+      })
+    },
+
     fetchAnimes(context, payload) {
       let params = {}
       if(payload) {
