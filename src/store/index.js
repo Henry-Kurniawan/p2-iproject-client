@@ -214,6 +214,21 @@ export default new Vuex.Store({
       })   
     },
 
+    actionAddBookmark(context, payload) {
+
+      return axios({
+        url: `${this.state.baseURL}/users/bookmarks`,
+        method:"post",
+        params: {
+          title: payload.animeTitle
+        },
+        headers: {
+          access_token: localStorage.access_token,
+          Accept: "application/json"
+        },
+      })
+    },
+
     actionFetchQRCode(context, payload) {
       const url = `${this.baseURL}${payload.path}`
       const params = {
