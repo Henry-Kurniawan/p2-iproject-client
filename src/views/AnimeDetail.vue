@@ -8,9 +8,14 @@
             <div class="card rgba-black-slight"></div>
 
             <div class="card-body">
-                <button @click.prevent="backToPreviousPage" type="button" class="btn btn-secondary btn-rounded">Back</button>
+              <button
+                @click.prevent="backToPreviousPage"
+                type="button"
+                class="btn btn-secondary btn-rounded"
+              >
+                Back
+              </button>
             </div>
-
           </div>
         </div>
       </div>
@@ -42,10 +47,11 @@
               <h5>Format: {{ animeFormat }}</h5>
             </div>
             <div class="my-4">
-              <div class="embed-responsive embed-responsive-16by9">
+
+              <div class="ratio ratio-16x9">
                 <iframe
-                  class="embed-responsive-item"
                   :src="animeDetail.data.trailer_url"
+                  title="Trailer Video"
                   allowfullscreen
                 ></iframe>
               </div>
