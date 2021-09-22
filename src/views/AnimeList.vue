@@ -131,12 +131,14 @@ export default {
     },
 
     bookmarks() {
-      return this.$store.state.bookmarks
-    }
+      return this.$store.state.bookmarks;
+    },
   },
 
   created() {
-    this.$store.dispatch("fetchBookmark");
+    if (this.isLoggedIn) {
+      this.$store.dispatch("fetchBookmark");
+    }
   },
 };
 </script>

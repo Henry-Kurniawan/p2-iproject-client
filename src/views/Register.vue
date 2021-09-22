@@ -137,6 +137,12 @@ export default {
           this.register_password = "";
           this.register_phone = "";
           this.register_address = "";
+
+          Swal.fire({
+            icon: "success",
+            title: "Welcome",
+            text: `Login success!`,
+          });
         })
         .catch((err) => {
           Swal.fire({

@@ -88,6 +88,17 @@ export default new Vuex.Store({
       })
     },
 
+    actionLoginGoogleSuccess(context, payload) {
+      const data = {
+        idToken: payload.idToken
+      }
+      return axios({
+        url: `${this.state.baseURL}/users/loginGoogle`,
+        method: "post",
+        data
+      })
+    },
+
     actionRegisterHandler(context, payload) {
       const {email, password, phoneNumber, address} = payload
       const register_payload = {
