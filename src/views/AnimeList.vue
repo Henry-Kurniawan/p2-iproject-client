@@ -11,16 +11,34 @@
     <div class="row g-4">
       <div v-for="anime in animes.data.documents" :key="anime.id" class="col-3 pt-5 text-black">
         <div class="card h-50 w-100">
+          <router-link
+            :to="{
+              name: 'AnimeDetail',
+              params: {
+                id: anime.id,
+              },
+            }"
+          >
           <img
             :src="anime.cover_image"
             class="card-img-top"
             alt="https://picsum.photos/200"
           />
+          </router-link>
 
           <div class="card-body text-center">
-            <button type="button" class="btn btn-info btn-sm mr-1 mb-2">
-              <i class="fas fa-info-circle pr-2"></i>Details
-            </button>
+            <router-link
+            :to="{
+              name: 'AnimeDetail',
+              params: {
+                id: anime.id,
+              },
+            }"
+          >
+              <button type="button" class="btn btn-info btn-sm mr-1 mb-2">
+                <i class="fas fa-info-circle pr-2"></i>Details
+              </button>
+            </router-link>
             <button
               type="button"
               class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main"
