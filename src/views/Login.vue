@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2"
 export default {
     name: "login",
     data() {
@@ -84,7 +85,11 @@ export default {
           this.login_password = "";
         })
         .catch((err) => {
-          console.log(err.response.data.message)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
         })
       }
     }

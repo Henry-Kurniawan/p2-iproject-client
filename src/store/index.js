@@ -31,13 +31,40 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    actionLoginHandler(context, login_payload) {
+    actionLoginHandler(context, payload) {
+      const {email, password} = payload
+      const login_payload = {
+        email,
+        password
+      }
       return axios({
         url: `${this.state.baseURL}/users/login`,
         method: "post",
         data: login_payload
       })
     },
+
+    actionRegisterHandler(context, payload) {
+      const {email, password, phoneNumber, address} = payload
+      const register_payload = {
+        email,
+        password,
+        phoneNumber,
+        address
+      }
+
+      return axios({
+        url: `${this.state.baseURL}/users/register`,
+        method: "post",
+        data: register_payload
+      })
+    },
+  },
+  getters: {
+    formatEmailName(state) {
+      let result = state.logged_email.split("@")
+      return result[0]
+    }
   },
   modules: {},
 });
