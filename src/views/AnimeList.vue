@@ -81,9 +81,6 @@ export default {
       return this.$store.state.animes
     },
   },
-  created() {
-    this.$store.dispatch("fetchAnime")
-  }
 };
 </script>
 

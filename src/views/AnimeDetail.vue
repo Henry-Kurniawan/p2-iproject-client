@@ -10,7 +10,7 @@
             <div class="card-body">
                 <button @click.prevent="backToPreviousPage" type="button" class="btn btn-secondary btn-rounded">Back</button>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -50,15 +50,6 @@
                 ></iframe>
               </div>
             </div>
-            <button
-              type="button"
-              class="btn btn-danger btn-md px-3 mb-lg-2 material-tooltip-main"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Add to wishlist"
-            >
-              <i class="far fa-heart"></i>
-            </button>
           </div>
         </div>
       </div>

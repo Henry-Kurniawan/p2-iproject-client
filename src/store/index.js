@@ -10,7 +10,14 @@ export default new Vuex.Store({
     isLoggedIn: false,
     baseURL: 'http://localhost:4002',
     logged_email: "",
+
+    prev_filter_name: "",
+    prev_filter_genres: [],
+    prev_filter_status: "",
+    prev_filter_format: "",
+
     animes:[],
+    animeGenres: [],
     animeDetail: "",
     QRCode: "",
   },
@@ -38,8 +45,19 @@ export default new Vuex.Store({
       state.animes = payload
     },
 
+    SET_PREV_FILTER(state, payload) {
+      state.prev_filter_name= payload.name
+      state.prev_filter_min_price= payload.min_price
+      state.prev_filter_max_price= payload.max_price
+      state.prev_filter_CategoryId= payload.CategoryId
+    },
+
     SET_ANIME_DETAIL(state, payload) {
       state.animeDetail = payload
+    },
+
+    SET_ANIME_GENRES(state, payload) {
+      state.animeGenres = payload
     },
 
     SET_QR_CODE(state, payload) {
@@ -76,16 +94,39 @@ export default new Vuex.Store({
       })
     },
 
-    fetchAnime(context) {
+    fetchAnimes(context, payload) {
+      let params = {}
+      if(payload) {
+        params = {
+          page: payload.page,
+          per_page: payload.per_page,
+          genres: payload.genres,
+          formats: payload.formats,
+          status: payload.status,
+          title: payload.title
+        }
+      }
+
       axios({
         url: `${this.state.baseURL}/animes`,
         method: "get",
+        params
       })
       .then(({data}) => {
         context.commit("SET_ANIMES", data)
+        context.commit("SET_PREV_FILTER", params)
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: `${data.data.count} anime found! total page: ${data.data.last_page}`,
+        });
       })
       .catch((err) => {
-        console.log(err.response.data.message)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.response.data.message 
+        })
       })
     },
 
@@ -96,6 +137,23 @@ export default new Vuex.Store({
       })
         .then( ({data} ) => {
           context.commit("SET_ANIME_DETAIL", data)
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message 
+          })
+        })
+    },
+
+    fetchGenres(context) {
+      axios({
+        url: `${this.state.baseURL}/animes/genres`,
+        method:"get",
+      })
+        .then( ({data} ) => {
+          context.commit("SET_ANIME_GENRES", data)
         })
         .catch((err) => {
           Swal.fire({
@@ -134,6 +192,7 @@ export default new Vuex.Store({
 
     }
   },
+
   getters: {
     formatEmailName(state) {
       let result = state.logged_email.split("@")
