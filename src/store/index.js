@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
-    baseURL: 'http://localhost:4002',
+    // baseURL: 'http://localhost:4002',
+    baseURL: 'https://heknime-planets.herokuapp.com',
     logged_email: "",
     isLoading: false,
 
@@ -297,7 +298,8 @@ export default new Vuex.Store({
     },
 
     formatGenre(state) {
-      let result = state.animeDetail.data.genres.join(", ")
+      // let result = state.animeDetail.data.genres.join(", ")
+      let result = state.animeDetail.data.genres
       return result
     },
 
