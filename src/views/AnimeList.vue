@@ -63,11 +63,11 @@
           </div>
 
           <div class="card-body">
-            <p v-if="anime.descriptions.en" class="card-text">
-              {{ anime.descriptions.en }}
+            <p v-if="anime.descriptions.en" v-html="anime.descriptions.en" class="card-text">
+              
             </p>
-            <p v-else class="card-text">
-              {{ anime.descriptions.it }}
+            <p v-else v-html="anime.descriptions.it" class="card-text">
+              
             </p>
           </div>
         </div>

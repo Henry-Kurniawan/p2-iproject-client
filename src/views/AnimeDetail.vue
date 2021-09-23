@@ -24,15 +24,21 @@
           <div class="col-lg-7 col-xl-7">
             <h3>{{ animeDetail.data.titles.en }}</h3>
             <hr />
+            
+            <h4>DESCRIPTION</h4>
+            <p v-if="animeDetail.data.descriptions.en" v-html="animeDetail.data.descriptions.en"  class="text-start mb-lg-0">
+              
+            </p>
+            <p v-else v-html="animeDetail.data.descriptions.it" class="text-start mb-lg-0">{{ animeDetail.data.descriptions.it }}</p>
+
             <h4>TAGS</h4>
-            <p class="mb-2 text-uppercase small">{{ animeGenre }}</p>
+            <ul class="nav nav-pills rowtext-uppercase small">
+              <div v-for="(animeGenre, i) in animeGenres" :key="i" class="col-3">
+                <li><a style="font-size:13px" class="text-decoration-none text-muted" >{{animeGenre}}</a></li>
+              </div>
+            </ul>
 
             <hr />
-            <h4>DESCRIPTION</h4>
-            <p v-if="animeDetail.data.descriptions.en" class="mb-lg-0">
-              {{ animeDetail.data.descriptions.en }}
-            </p>
-            <p v-else class="mb-lg-0">{{ animeDetail.data.descriptions.it }}</p>
           </div>
           <div class="col-lg-5 col-xl-5">
             <h6 class="mb-3"><span>MORE INFO</span></h6>
@@ -76,7 +82,7 @@ export default {
       return this.$store.state.animeDetail;
     },
 
-    animeGenre() {
+    animeGenres() {
       return this.$store.getters.formatGenre;
     },
 
